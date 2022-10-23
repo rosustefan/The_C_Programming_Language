@@ -19,15 +19,37 @@ int main() {
 int htoi(s) /* convert s to integer */
 char s[];
 {
-    int i, j, decimal, base;
+    printf("\n---------------------------------\n");
+	int i, j, decimal, base, nc;
 
+    nc = 0;
+	for (i = 0; s[i]; ++i)
+    	if (s[i] != EOF)
+			++nc;
+  
+	printf("The number of characters in the string '%s' is %d\n", s, nc);
+	
     decimal = 0;
   	base = 1;
-    for (i = 0; s[i] >= '0' && s[i] <= '9'; ++i) /* not good, need to go from max s[] length to 0 */
-        for (j = 0; j <= i; ++j)
+    for (i = nc-1; i >= 0; --i)
         {
-            decimal += s[i - '0'] * base;
-            base *= 16;
+			printf("The current base value is %d\n", base);
+			printf("The current decimal value is %d\n", s[i]);
+
+			if (s[i] >= '0' && s[i] <= '9')
+				decimal += (s[i] - '0') * base;
+			else if (s[i] >= 'a' && s[i] <= 'z')
+				decimal += (s[i] - 'a') * base;
+			else if (s[i] >= 'A' && s[i] <= 'Z')
+				decimal += (s[i] - 'A') * base;
+
+			base *= 16;
         }
     return(decimal);
 }
+
+// 10^0 = 1
+// 10^1 = 10
+// 10^2 = 100
+// 10^3 = 1000
+// 10^4 = 10000
