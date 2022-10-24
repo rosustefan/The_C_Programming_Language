@@ -19,7 +19,7 @@ int main() {
 int htoi(s) /* convert s to integer */
 char s[];
 {
-    printf("\n---------------------------------\n");
+    // printf("\n---------------------------------\n");
 	int i, j, decimal, base, nc;
 
     nc = 0;
@@ -27,26 +27,30 @@ char s[];
     	if (s[i] != EOF)
 			++nc;
   
-	printf("The number of characters in the string '%s' is %d\n", s, nc);
+	// printf("The number of characters in the string '%s' is %d\n", s, nc);
 	
     decimal = 0;
   	base = 1;
     for (i = nc-1; i >= 0; --i)
         {
-			printf("The current base value is %d\n", base);
-			printf("The current decimal value is %d\n", s[i]);
+			// printf("The current base value is %d\n", base);
+			// printf("The current decimal value is %d\n", s[i]);
 
 			if (s[i] >= '0' && s[i] <= '9')
 				decimal += (s[i] - '0') * base;
-			else if (s[i] >= 'a' && s[i] <= 'z')
-				decimal += (s[i] - 'a') * base;
-			else if (s[i] >= 'A' && s[i] <= 'Z')
-				decimal += (s[i] - 'A') * base;
+			else if (s[i] >= 'a' && s[i] <= 'f')
+				decimal += (s[i] - 'a' + 10) * base;
+			else if (s[i] >= 'A' && s[i] <= 'F')
+				decimal += (s[i] - 'A' + 10) * base;
 
 			base *= 16;
         }
     return(decimal);
 }
+
+// F0 = F*16^1 + 0*16^0
+
+// 0 1 2 3 4 5 6 7 8 9 A B C D E F
 
 // 10^0 = 1
 // 10^1 = 10
